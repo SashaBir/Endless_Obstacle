@@ -1,11 +1,11 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class LinearHitter : MonoBehaviour
+public class LinearPendulum : MonoBehaviour
 {
     [SerializeField] private Transform _source;
-    [SerializeField] private Transform _forwardPoint;
-    [SerializeField] private Transform _backPoint;
+    [SerializeField] private Vector3 _forwardEulerAngles;
+    [SerializeField] private Vector3 _backEulerAngles;
     [SerializeField] private float _forwardDuration;
     [SerializeField] private float _backDuration;
 
@@ -20,12 +20,12 @@ public class LinearHitter : MonoBehaviour
     public void Launch()
     {
         _source
-            .DOLocalMove(_backPoint.localPosition, _backDuration)
+            .DOLocalRotate(_backEulerAngles, _backDuration)
             .SetEase(_ease)
             .OnComplete(() =>
             {
                 _source
-                    .DOLocalMove(_forwardPoint.localPosition, _forwardDuration)
+                    .DOLocalRotate(_forwardEulerAngles, _forwardDuration)
                     .SetEase(_ease)
                     .OnComplete(Launch);
             });
