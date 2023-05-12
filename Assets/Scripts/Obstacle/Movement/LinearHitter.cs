@@ -17,7 +17,7 @@ public class LinearHitter : MonoBehaviour
         Launch();
     }
 
-    public void Launch()
+    private void Launch()
     {
         _source
             .DOLocalMove(_backPoint.localPosition, _backDuration)

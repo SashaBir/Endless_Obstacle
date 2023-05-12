@@ -17,7 +17,7 @@ public class LinearPendulum : MonoBehaviour
         Launch();
     }
 
-    public void Launch()
+    private void Launch()
     {
         _source
             .DOLocalRotate(_backEulerAngles, _backDuration)

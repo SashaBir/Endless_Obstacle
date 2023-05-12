@@ -4,5 +4,5 @@
 [RequireComponent(typeof(Rigidbody))]
 public class HitDistributor : MonoBehaviour
 {
-    [field: SerializeField] public float Lenght { get; private set; }
+    [field: SerializeField] public float Distance { get; private set; }
 }

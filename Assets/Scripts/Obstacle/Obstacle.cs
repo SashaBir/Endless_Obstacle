@@ -1,8 +1,6 @@
 using UnityEngine;
 
-public abstract class Obstacle : MonoBehaviour
+public class Obstacle : MonoBehaviour
 {
     [field: SerializeField] public int Score { get; private set; }
-
-    public abstract void Launch();
 }

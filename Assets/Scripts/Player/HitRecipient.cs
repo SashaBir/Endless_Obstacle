@@ -9,11 +9,11 @@ public class HitRecipient : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.TryGetComponent(out HitDistributor distributor) == true)
-            Hit(collision.contacts[0].normal, distributor.Lenght);
+            Hit(collision.contacts[0].normal, distributor.Distance);
     }
 
-    private void Hit(Vector3 normal, float lenght)
+    private void Hit(Vector3 normal, float distance)
     {
-
+        _recipient.AddForce(normal * PhysicsExpansion.CalculateForceNoMass(distance), ForceMode.Impulse);
     }
 }
