@@ -30,7 +30,7 @@ public class ObstacleSpawner : MonoBehaviour
         _counter = 0;
     }
 
-    private async UniTask ProcessSpawn(CancellationToken token)
+    private async UniTaskVoid ProcessSpawn(CancellationToken token)
     {
         do
         {
