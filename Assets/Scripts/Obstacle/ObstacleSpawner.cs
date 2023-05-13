@@ -1,5 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
@@ -8,6 +10,8 @@ public class ObstacleSpawner : MonoBehaviour
     [SerializeField] private Spawnpoint[] _spawnpoints;
     [SerializeField] private Transform _container;
     [SerializeField] private float _delay;
+
+    public event Action<GameObject> OnSpawned;
 
     private CancellationTokenSource _tokenSource;
     private int _counter = 0;
@@ -38,7 +42,9 @@ public class ObstacleSpawner : MonoBehaviour
             foreach (var point in spawnpoint.Points)
             {
                 var prefab = GetPrefab();
-                Spawn(prefab, point.position);
+                var obstacle = Spawn(prefab, point.position);
+
+                OnSpawned.Invoke(obstacle);
             }
 
             await UniTask.Delay(_delay.ToDelayMillisecond(), cancellationToken: token);
@@ -46,9 +52,9 @@ public class ObstacleSpawner : MonoBehaviour
         while (token.IsCancellationRequested == false);
     }
 
-    private void Spawn(GameObject prefab, Vector3 spawnpoint)
+    private GameObject Spawn(GameObject prefab, Vector3 spawnpoint)
     {
-        Instantiate(prefab, spawnpoint, Quaternion.identity, _container);
+        return Instantiate(prefab, spawnpoint, Quaternion.identity, _container);
     }
 
     private Spawnpoint GetSpawnpoint()
@@ -63,7 +69,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     private GameObject GetPrefab()
     {
-        int indexPrefab = Random.Range(0, _prefabs.Length);
+        int indexPrefab = UnityEngine.Random.Range(0, _prefabs.Length);
         return _prefabs[indexPrefab];
     }
 }
