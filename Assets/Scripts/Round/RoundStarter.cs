@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RoundStarter : MonoBehaviour
 {
@@ -12,6 +11,8 @@ public class RoundStarter : MonoBehaviour
 
     public void StartRound() 
     {
+        Debug.Log("Start Game");
+
         _spawner.StartSpawn();
     }
 }

@@ -44,7 +44,7 @@ public class ObstacleSpawner : MonoBehaviour
                 var prefab = GetPrefab();
                 var obstacle = Spawn(prefab, point.position);
 
-                OnSpawned.Invoke(obstacle);
+                OnSpawned?.Invoke(obstacle);
             }
 
             await UniTask.Delay(_delay.ToDelayMillisecond(), cancellationToken: token);
